@@ -1,9 +1,12 @@
 import { Router } from 'express';
 
-const routes = new Router();
+import SessionController from './app/controllers/SessionController';
 
-routes.get('/', (req, res) => {
-  return res.json({ message: 'hello world' });
-});
+import authMiddleware from './app/middlewares/auth';
+
+const routes = new Router();
+routes.post('/sessions', SessionController.store);
+
+routes.use(authMiddleware);
 
 export default routes;
